@@ -11,6 +11,13 @@ var app = express();
 // exposed APIs
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    res.append('x-slb-app', 'true');
+    next();
+});
 // Create link to Angular build directory
 // The `ng build` command will save the result
 // under the `dist` folder.
